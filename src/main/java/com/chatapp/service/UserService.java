@@ -58,15 +58,16 @@ public class UserService {
         return uChatterRepository.save(new UChatter(chatterDTO.getUsername(), chatterDTO.getPassword()));
     }
 
+
     public UChatter getChatterById(long id, UserDetails userDetails) {
-        System.err.println("------by id");
         return findChatterById(id);
     }
 
+
     public UChatter getChatterByUsername(String username, UserDetails userDetails) {
-        System.err.println("------by username");
         return findChatterByUsername(username);
     }
+
 
     public UChatter updateChatter(long id, UserDetails userDetails, UChatterDTO chatterDTO) {
         checkRequestIdUsernameMatchesLoggedUser(id, userDetails);
@@ -82,14 +83,12 @@ public class UserService {
         if (chatterDTO.getProfileImg() != null && chatterDTO.getProfileImg() != "") chatter.setProfileImg(chatterDTO.getProfileImg());
         if (chatterDTO.getProfileName() != null) chatter.setProfileName(chatterDTO.getProfileName());
 
-        System.err.println("------updateChatter");
         return uChatterRepository.save(chatter);
     }
 
 
     public String deleteChatter(long id, UserDetails userDetails) {
         checkRequestIdUsernameMatchesLoggedUser(id, userDetails);
-        System.err.println("---- deleting");
         uChatterRepository.deleteById(id);
         return "User account deleted";
     }

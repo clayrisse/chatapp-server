@@ -1,10 +1,7 @@
 package com.chatapp;
 
 import com.chatapp.dto.UChatterDTO;
-import com.chatapp.model.Contact;
-import com.chatapp.model.UAdmin;
-import com.chatapp.model.UChatter;
-import com.chatapp.model.User;
+import com.chatapp.model.*;
 import com.chatapp.repository.*;
 import com.chatapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +34,7 @@ public class Application implements CommandLineRunner {
 	@Autowired	UAdminRepository uAdminRepository;
 	@Autowired	ContactRepository contactRepository;
 	@Autowired	UserService userService;
+	@Autowired 	ChatRepository chatRepository;
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -69,8 +67,12 @@ public class Application implements CommandLineRunner {
 		System.err.println(chatter.toString());
 //		userService.updateChatter(1, chatter);
 
-
-
+		UChatter peerChatter = userService.findChatterByUsername("t2");
+		UChatter chatter1 = userService.findChatterByUsername("t1");
+		Chat chat = Chat.builder().peerId(peerChatter.getId()).userOwner(chatter1).build();
+		chatRepository.save(chat);
+//		chatter1.addChat(chat);
+//		uChatterRepository.save(chatter1);
 
 
 	}
