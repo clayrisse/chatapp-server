@@ -1,12 +1,14 @@
 package com.chatapp.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+//@Table(name = "roles")
 public class Role {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,6 +22,7 @@ public class Role {
         this.role = role;
         this.user = user;
     }
+
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

@@ -1,6 +1,6 @@
-//package com.chatapp.controller;
+//package com.chatapp.controller.socket;
 //
-//import com.chatapp.model.ChatMessage;
+//import com.chatapp.model.socket.ChatMessage;
 //import org.springframework.messaging.handler.annotation.MessageMapping;
 //import org.springframework.messaging.handler.annotation.Payload;
 //import org.springframework.messaging.handler.annotation.SendTo;

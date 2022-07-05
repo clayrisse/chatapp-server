@@ -21,6 +21,8 @@ public class Contact {
     private long id;
     private String username;
     private String customName;
+//    @ManyToOne
+//    private UChatter uChatter;
 //    private long contactId;
 
 }

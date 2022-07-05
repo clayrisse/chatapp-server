@@ -1,7 +1,7 @@
-//package com.chatapp.controller;
+//package com.chatapp.controller.socket;
 //
-//import com.chatapp.model.ChatMessage;
-//import com.chatapp.model.MessageType;
+//import com.chatapp.model.socket.ChatMessage;
+//import com.chatapp.model.socket.MessageType;
 //import org.apache.catalina.SessionEvent;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;

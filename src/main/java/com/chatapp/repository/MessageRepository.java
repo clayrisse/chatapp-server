@@ -1,9 +1,9 @@
 package com.chatapp.repository;
 
-import com.chatapp.model.Role;
+import com.chatapp.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface MessageRepository extends JpaRepository<Message, Long> {
 }

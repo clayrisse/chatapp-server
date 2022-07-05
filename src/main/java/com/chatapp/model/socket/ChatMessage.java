@@ -1,4 +1,4 @@
-//package com.chatapp.model;
+//package com.chatapp.model.socket;
 //
 //import lombok.Builder;
 //import lombok.Getter;

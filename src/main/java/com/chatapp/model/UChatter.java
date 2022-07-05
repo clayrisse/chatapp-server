@@ -1,59 +1,51 @@
 package com.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-
-@Entity
+@Entity//(name = "chatters")
 @Data
-@Builder
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "userId")
-public class UChatter implements User {
+public class UChatter extends User {
 
-
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-////    private int id;
-//    private long id;
-//    @Column(unique = true)
-//    private String username;
-//    private String password;
     private String profileName;
     private String profileImg;
     private LocalDateTime lastSeen;
+//    @OneToMany(mappedBy = "user")
+    private ArrayList<Contact> contactList;
+    @JsonIgnore
+    @OneToMany(mappedBy = "userOwner")
+    private List<Talk> talkList;
 
-    private ArrayList<Contact> contactList = new ArrayList<>();
-    private ArrayList<Talk> talkList = new ArrayList<>();
 
-    public UChatter(String username, String profileName) {
-        super (username);
-        this.profileName = profileName;
-//        this.username = username;
+    public UChatter(String username, String password) {
+        super(username, password);
+        this.lastSeen = LocalDateTime.now();
+//        this.talkList = new ArrayList<>();
+        this.contactList = new ArrayList<>();
+        this.profileImg = "https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png";
+        this.profileName = username;
+        super.setRole("CHATTER");
     }
 
+//    publ
     public void setProfileName(String profileName) {
         this.profileName = profileName.toUpperCase();
     }
 
-//    public Contact addContact(Contact contact) {
-//        this.contactList.add(contact);
-//        return contact;
-//    }
-
-
-    //-------------------regarding security
-    public Set<Role> getRoles() { return roles; }
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
-}
-
-
+    public Contact addContact(Contact contact) {
+        this.contactList.add(contact);
+        return contact;
+    }
 
 }

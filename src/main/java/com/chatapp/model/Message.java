@@ -1,5 +1,6 @@
 package com.chatapp.model;
 
+import com.chatapp.enums.MsgStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,6 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Message {
 

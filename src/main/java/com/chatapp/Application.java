@@ -1,14 +1,22 @@
 package com.chatapp;
 
+import com.chatapp.dto.UChatterDTO;
 import com.chatapp.model.Contact;
+import com.chatapp.model.UAdmin;
+import com.chatapp.model.UChatter;
 import com.chatapp.model.User;
-import com.chatapp.repository.ContactRepository;
-import com.chatapp.repository.UserRepository;
+import com.chatapp.repository.*;
+import com.chatapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
@@ -24,33 +32,45 @@ public class Application implements CommandLineRunner {
 	}
 
 	@Autowired	UserRepository userRepository;
+	@Autowired	RoleRepository roleRepository;
+	@Autowired	UChatterRepository uChatterRepository;
+	@Autowired	UAdminRepository uAdminRepository;
 	@Autowired	ContactRepository contactRepository;
+	@Autowired	UserService userService;
+
+	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		User u = new User ();
-		System.err.println(u);
-		User u1 = new User (38677,"username1","password1","name1", "profilepin1", LocalDateTime.now(),new ArrayList<>(),new ArrayList<>());
-//		User u1 = new User (38677,"username1","password1","name1", "profilepin1");
-		User u2 = new User ("name2","username2");
-		User u3 = User.builder().profileName("name3").build();
-//
-		userRepository.saveAll(List.of(u, u1, u2, u3));
-		u.setName("test");
-		userRepository.save(u);
-//		System.err.println("-------------------------------------" );
-////		if (userRepository.findByUsername("name177").isPresent()) {
-////			System.err.println("sssssssssssssssss");
-////			User ux = userRepository.findByUsername(u1.getUsername()).get();
-////			System.err.println(ux.getUsername());
-////		}
-////
-		Contact c1 = Contact.builder().username("name177").customName("pepito117").build();
-		Contact c2 = Contact.builder().username("username2").customName("pepito117").build();
-//
-		contactRepository.save(c1);
-		contactRepository.save(c2);
+	//---------------create type of users
+
+//		User user = userRepository.save(new User("a","a"));
+//		user.setRole("ADMIN");
+//		userRepository.save(user);
+//		System.err.println("........1");
+//		UAdmin admin = UAdmin.builder().username("admonistrrator").password("dsdvsvsd").build();
+//		admin.setRole("ADMIN");
+//		uAdminRepository.save(admin);
+//		System.err.println("........2");
+//		UChatter uc1 = new UChatter("pepi", "pepi");
+//		System.err.println(uc1.getLastSeen());
+//		System.err.println("........3");
+//		uChatterRepository.save(uc1);
+		System.err.println("........................................you made a user, uChatter and a uAdmin alright");
+
+	//-------------------------------------------users
+
+		userService.addChatter(new UChatterDTO("t1", "t1t1"));
+		userService.addChatter(new UChatterDTO("t2", "t2t2"));
+		UChatterDTO chatter= new UChatterDTO();
+		chatter.setProfileName("Don Pepito Mogollon");
+//		chatter.setUsername("t2");
+		System.err.println(chatter.toString());
+		userService.updateChatter(1, chatter);
+
+
+
 
 
 	}
