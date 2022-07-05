@@ -23,7 +23,7 @@ public class UserService {
     public boolean checkIfUsernameIsTaken(String username){
         if (uChatterRepository.findByUsername(username).isPresent()) {
             System.err.println("This username '" + username + "' is taken");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This username is already in use");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This username: '" + username + "', is already in use");
         }
         return true;
     }
@@ -44,6 +44,13 @@ public class UserService {
         return uChatterRepository.findById(id).get();
     }
 
+    public boolean checkRequestIdUsernameMatchesLoggedUser(long id, UserDetails userDetails) {
+        if (!(findChatterById(id).getUsername().equals(userDetails.getUsername()))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "What are you doing? You are not the owner of this account");
+        }
+        return true;
+    }
+
 //------------------------------------------------------------------------------------for controlers
 
     public UChatter addChatter(UChatterDTO chatterDTO) {
@@ -61,33 +68,33 @@ public class UserService {
         return findChatterByUsername(username);
     }
 
-
-//================================================================================== check line
-
-
-
-
-    public UChatter updateChatter(long id, UChatterDTO chatterDTO) {
-        System.err.println("------updateChatter1");
+    public UChatter updateChatter(long id, UserDetails userDetails, UChatterDTO chatterDTO) {
+        checkRequestIdUsernameMatchesLoggedUser(id, userDetails);
+        if (userDetails.getUsername().equals(chatterDTO.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "'" + chatterDTO.getUsername() + "' is already your username");
+        }
         UChatter chatter = findChatterById(id);
-        System.err.println("/////0" );
         if (chatterDTO.getUsername()!= null && chatterDTO.getUsername()!= "") {
-        System.err.println("/////1");
             checkIfUsernameIsTaken(chatterDTO.getUsername());
+            chatter.setUsername(chatterDTO.getUsername());
         }
-        System.err.println("/////2");
-        if (chatterDTO.getPassword()!= null && chatterDTO.getPassword()!= "") {
-            chatter.setPassword(chatterDTO.getPassword());
-        }
-        System.err.println("/////3");
+        if (chatterDTO.getPassword()!= null && chatterDTO.getPassword()!= "") chatter.setPassword(chatterDTO.getPassword());
         if (chatterDTO.getProfileImg() != null && chatterDTO.getProfileImg() != "") chatter.setProfileImg(chatterDTO.getProfileImg());
-        System.err.println("/////4");
         if (chatterDTO.getProfileName() != null) chatter.setProfileName(chatterDTO.getProfileName());
-        System.err.println("/////5");
-        System.err.println("------updateChatter2");
-        return uChatterRepository.save(chatter);
 
+        System.err.println("------updateChatter");
+        return uChatterRepository.save(chatter);
     }
+
+
+    public String deleteChatter(long id, UserDetails userDetails) {
+        checkRequestIdUsernameMatchesLoggedUser(id, userDetails);
+        System.err.println("---- deleting");
+        uChatterRepository.deleteById(id);
+        return "User account deleted";
+    }
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
 
 
 

@@ -20,20 +20,20 @@ public class UserController {
 //    @Autowired    UAdminRepository uAdminRepository;
     @Autowired    UserService userService;
 
-    @GetMapping("/create-account")
+    @GetMapping("/check")
     @CrossOrigin()  @ResponseStatus(HttpStatus.OK)
     public String sayhi() {
-        System.err.println("------hi 1");
-        return "Hiiii";
-//        return userService.addUser(chatterDTO);
+        System.err.println("------checking connection");
+        return "Hiiii, it is connected";
     }
 
-    @PostMapping("/create-account")
+    @PostMapping("/create/user")
     @CrossOrigin()  @ResponseStatus(HttpStatus.CREATED)
     public UChatter createUChatter(@RequestBody UChatterDTO chatterDTO) {
-        System.err.println("------1");
         return userService.addChatter(chatterDTO);
     }
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
 
 
 }

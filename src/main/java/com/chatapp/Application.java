@@ -67,7 +67,7 @@ public class Application implements CommandLineRunner {
 		chatter.setProfileName("Don Pepito Mogollon");
 //		chatter.setUsername("t2");
 		System.err.println(chatter.toString());
-		userService.updateChatter(1, chatter);
+//		userService.updateChatter(1, chatter);
 
 
 
