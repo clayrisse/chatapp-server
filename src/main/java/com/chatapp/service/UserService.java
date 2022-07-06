@@ -39,7 +39,7 @@ public class UserService {
     public UChatter findChatterById(long id){
         if (uChatterRepository.findById(id).isEmpty()) {
             System.err.println("Chatter with " + id + " not found");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chatter with " + id + " not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chatter with id '" + id + "' not found");
         }
         return uChatterRepository.findById(id).get();
     }

@@ -1,5 +1,6 @@
 package com.chatapp;
 
+import com.chatapp.controller.MessageController;
 import com.chatapp.dto.UChatterDTO;
 import com.chatapp.model.*;
 import com.chatapp.repository.*;
@@ -35,6 +36,7 @@ public class Application implements CommandLineRunner {
 	@Autowired	ContactRepository contactRepository;
 	@Autowired	UserService userService;
 	@Autowired 	ChatRepository chatRepository;
+	@Autowired	MessageController msgController;
 
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -59,20 +61,9 @@ public class Application implements CommandLineRunner {
 
 	//-------------------------------------------users
 
-		userService.addChatter(new UChatterDTO("t1", "t1t1"));
-		userService.addChatter(new UChatterDTO("t2", "t2t2"));
-		UChatterDTO chatter= new UChatterDTO();
-		chatter.setProfileName("Don Pepito Mogollon");
-//		chatter.setUsername("t2");
-		System.err.println(chatter.toString());
-//		userService.updateChatter(1, chatter);
-
-		UChatter peerChatter = userService.findChatterByUsername("t2");
-		UChatter chatter1 = userService.findChatterByUsername("t1");
-		Chat chat = Chat.builder().peerId(peerChatter.getId()).userOwner(chatter1).build();
-		chatRepository.save(chat);
-//		chatter1.addChat(chat);
-//		uChatterRepository.save(chatter1);
+		userService.addChatter(new UChatterDTO("u1", "uu"));
+		userService.addChatter(new UChatterDTO("u2", "uu"));
+		userService.addChatter(new UChatterDTO("u3", "uu"));
 
 
 	}

@@ -16,8 +16,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@MappedSuperclass
-//public abstract class User {
 public class User {
 
     @Id
@@ -46,8 +44,6 @@ public class User {
     public void setRole(String role) {
         roles.add(new Role(role, this));
     }
-
-
 
 
 }

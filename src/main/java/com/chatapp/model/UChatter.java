@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity//(name = "chatters")
@@ -19,8 +20,9 @@ public class UChatter extends User {
     private LocalDateTime lastSeen;
 //    @OneToMany(mappedBy = "user")
     private ArrayList<Contact> contactList;
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(mappedBy = "userOwner")
+//    private HashMap<String, Chat> chatList;
     private List<Chat> chatList;
 
 
@@ -44,4 +46,11 @@ public class UChatter extends User {
         return contact;
     }
 
- }
+    public List<Chat> getChatList() {
+        return chatList;
+    }
+
+    public void setChatList(List<Chat> chatList) {
+        this.chatList = chatList;
+    }
+}

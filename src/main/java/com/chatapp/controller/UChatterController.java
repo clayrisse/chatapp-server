@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("chatter/")
 public class UChatterController {
 
-//    @Autowired UChatterRepository uChatterRepository;
     @Autowired UserService userService;
 
     @GetMapping("{id}")

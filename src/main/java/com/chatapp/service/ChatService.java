@@ -3,19 +3,17 @@ package com.chatapp.service;
 import com.chatapp.model.Chat;
 import com.chatapp.model.UChatter;
 import com.chatapp.repository.ChatRepository;
-import com.chatapp.repository.UChatterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
 
 @Service
 public class ChatService {
 
-    @Autowired    UChatterRepository uChatterRepository;
     @Autowired    ChatRepository chatRepository;
     @Autowired    UserService userService;
 
@@ -24,7 +22,10 @@ public class ChatService {
         UChatter currentChatter = userService.findChatterByUsername(userDetails.getUsername());
         UChatter peerChatter = userService.findChatterByUsername(peerUsername);
         if (chatRepository.findByPeerId(peerChatter.getId()).isEmpty()) {
-            return chatRepository.save(Chat.builder().peerId(peerChatter.getId()).userOwner(currentChatter).build());
+             return chatRepository.save(Chat.builder().peerId(peerChatter.getId())
+                                                    .msgIdList(new ArrayList<Long>())
+                                                    .msgList(new ArrayList<>())
+                                                    .userOwner(currentChatter).build());
         }
         return chatRepository.findByPeerId(peerChatter.getId()).get();
     }
@@ -44,4 +45,5 @@ public class ChatService {
     }
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
+
 }
