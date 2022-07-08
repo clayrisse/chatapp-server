@@ -17,7 +17,7 @@ public class UChatter extends User {
 
     private String profileName;
     private String profileImg;
-    private LocalDateTime lastSeen;
+//    private LocalDateTime lastSeen;
 //    @OneToMany(mappedBy = "user")
     private ArrayList<Contact> contactList;
 //    @JsonIgnore
@@ -28,7 +28,7 @@ public class UChatter extends User {
 
     public UChatter(String username, String password) {
         super(username, password);
-        this.lastSeen = LocalDateTime.now();
+//        this.lastSeen = LocalDateTime.now();
 //        this.chatList = new ArrayList<>();
         this.contactList = new ArrayList<>();
         this.profileImg = "https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png";

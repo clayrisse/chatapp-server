@@ -31,5 +31,11 @@ public class ChatController {
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
 
+    @GetMapping("{chatId}")
+    @CrossOrigin()  @ResponseStatus(HttpStatus.OK)
+    public Chat getChatById(@PathVariable long chatId, @AuthenticationPrincipal UserDetails userDetails) {
+        return chatService.getChatById(chatId, userDetails);
+    }
+
 
 }

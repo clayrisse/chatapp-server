@@ -18,8 +18,10 @@ public class MessageController {
     @PostMapping("/")
     @CrossOrigin()
     @ResponseStatus(HttpStatus.CREATED)
-    public Message sendMessage(@AuthenticationPrincipal UserDetails userDetails, @RequestBody MsgDTO msgDTO) {
-        return msgService.sendMessage(userDetails, msgDTO);
+
+    public Message sendMessage(@RequestBody MsgDTO msgDTO, @AuthenticationPrincipal UserDetails userDetails) {
+        System.err.println("entreeee-------------------------"+ msgDTO.toString());
+        return msgService.sendMessage(msgDTO, userDetails);
     }
 
     @DeleteMapping("/{msgId}")

@@ -28,6 +28,7 @@ public class UChatterController {
         return userService. getChatterByUsername(username, userDetails);
     }
 
+
     @PutMapping("{id}/update")
     @CrossOrigin()  @ResponseStatus(HttpStatus.OK)
     public UChatter updateChatter(@PathVariable long id, @AuthenticationPrincipal UserDetails userDetails, @RequestBody UChatterDTO chatterDTO) {
@@ -43,5 +44,8 @@ public class UChatterController {
     }
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
+
+
+
 
 }

@@ -20,7 +20,7 @@ public class Chat {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long peerId;
-    private ArrayList<Long> msgIdList;
+//    private ArrayList<Long> msgIdList;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     @JoinTable( name = "chatMsg",
@@ -36,7 +36,7 @@ public class Chat {
     public void addMessage(Message msg) {
 
         System.err.println("adding msg to list");
-        this.msgIdList.add(msg.getId());
+//        this.msgIdList.add(msg.getId());
         this.msgList.add(msg);
         msg.getChatList().add(this);
     }

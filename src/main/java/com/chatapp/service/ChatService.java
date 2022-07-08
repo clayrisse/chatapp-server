@@ -23,7 +23,6 @@ public class ChatService {
         UChatter peerChatter = userService.findChatterByUsername(peerUsername);
         if (chatRepository.findByPeerId(peerChatter.getId()).isEmpty()) {
              return chatRepository.save(Chat.builder().peerId(peerChatter.getId())
-                                                    .msgIdList(new ArrayList<Long>())
                                                     .msgList(new ArrayList<>())
                                                     .userOwner(currentChatter).build());
         }
@@ -45,5 +44,17 @@ public class ChatService {
     }
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
+
+
+    public Chat getChatById(long chatId, UserDetails userDetails) {
+        UChatter currentChatter = userService.findChatterByUsername(userDetails.getUsername());
+        if (chatRepository.findById(chatId).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chat not found");
+        }
+        if (chatRepository.findById(chatId).get().getUserOwner().getId() != currentChatter.getId()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chat doesn't belong to this user");
+        }
+        return chatRepository.findById(chatId).get();
+    }
 
 }

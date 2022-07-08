@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -58,16 +59,13 @@ public class UserService {
         return uChatterRepository.save(new UChatter(chatterDTO.getUsername(), chatterDTO.getPassword()));
     }
 
-
     public UChatter getChatterById(long id, UserDetails userDetails) {
         return findChatterById(id);
     }
 
-
     public UChatter getChatterByUsername(String username, UserDetails userDetails) {
         return findChatterByUsername(username);
     }
-
 
     public UChatter updateChatter(long id, UserDetails userDetails, UChatterDTO chatterDTO) {
         checkRequestIdUsernameMatchesLoggedUser(id, userDetails);
@@ -86,7 +84,6 @@ public class UserService {
         return uChatterRepository.save(chatter);
     }
 
-
     public String deleteChatter(long id, UserDetails userDetails) {
         checkRequestIdUsernameMatchesLoggedUser(id, userDetails);
         uChatterRepository.deleteById(id);
@@ -95,7 +92,21 @@ public class UserService {
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ checked, cleaned and tested code
 
+    public UChatter getLoggedUser(UserDetails userDetails) {
+        return findChatterByUsername(userDetails.getUsername());
+    }
 
+    public UChatter checkUserLogged(UserDetails userDetails) {
+        return  findChatterByUsername(userDetails.getUsername());
+    }
+
+    public String getUsernameById(long id) {
+        return findChatterById(id).getUsername();
+    }
+
+    public long getIdByUsername( String username) {
+        return findChatterByUsername(username).getId();
+    }
 
 
 }
