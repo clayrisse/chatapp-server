@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-
+hs*
+!**/src/main/java/resources/application.properties
 
 hr*
