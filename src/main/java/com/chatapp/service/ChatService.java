@@ -23,6 +23,7 @@ public class ChatService {
         UChatter peerChatter = userService.findChatterByUsername(peerUsername);
         if (chatRepository.findByPeerId(peerChatter.getId()).isEmpty()) {
              return chatRepository.save(Chat.builder().peerId(peerChatter.getId())
+                                                    .senderId(currentChatter.getId())
                                                     .msgList(new ArrayList<>())
                                                     .userOwner(currentChatter).build());
         }

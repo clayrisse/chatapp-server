@@ -1,5 +1,6 @@
 package com.chatapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,12 +16,16 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 public class Contact {
 
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String customName;
-//    @ManyToOne
-//    private UChatter uChatter;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "userId")
+    private UChatter contactOwner;
 //    private long contactId;
 
 }

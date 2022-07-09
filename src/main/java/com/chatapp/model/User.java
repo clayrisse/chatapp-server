@@ -31,6 +31,8 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Role> roles = new HashSet<>();
 
+//    private String role = "CHATTER";
+
 
     public User(String username, String password) {
         this.username = username;

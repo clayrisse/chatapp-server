@@ -1,4 +1,4 @@
-package com.chatapp.web;
+package com.chatapp.socket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +20,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-//        config.enableSimpleBroker( "/user");
-//        config.setApplicationDestinationPrefixes("/app");
-//        config.setUserDestinationPrefix("/user");
-        config.enableSimpleBroker( "/chatter");
+        config.enableSimpleBroker( "/user");
         config.setApplicationDestinationPrefixes("/app");
-        config.setUserDestinationPrefix("/chatter");
+        config.setUserDestinationPrefix("/user");
+
     }
 
     @Override
@@ -34,8 +32,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 //                .addEndpoint("/ws")
 //                .setAllowedOrigins("*")
 
-                .addEndpoint("/chat")
-                .setAllowedOrigins("http://localhost:4200")
+                .addEndpoint("/ws")
+                .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
 

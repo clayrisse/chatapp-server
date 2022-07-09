@@ -18,8 +18,8 @@ public class UChatter extends User {
     private String profileName;
     private String profileImg;
 //    private LocalDateTime lastSeen;
-//    @OneToMany(mappedBy = "user")
-    private ArrayList<Contact> contactList;
+    @OneToMany(mappedBy = "contactOwner")
+    private List<Contact> contactList;
 //    @JsonIgnore
     @OneToMany(mappedBy = "userOwner")
 //    private HashMap<String, Chat> chatList;
@@ -30,7 +30,7 @@ public class UChatter extends User {
         super(username, password);
 //        this.lastSeen = LocalDateTime.now();
 //        this.chatList = new ArrayList<>();
-        this.contactList = new ArrayList<>();
+//        this.contactList = new ArrayList<>();
         this.profileImg = "https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png";
         this.profileName = username;
         super.setRole("CHATTER");

@@ -26,7 +26,7 @@ public class MessageService {
 
     public Message sendMessage(MsgDTO msgDTO, UserDetails userDetails) {
         UChatter currentUser = userService.findChatterByUsername(userDetails.getUsername());
-        UChatter peerChatter = userService.findChatterById(msgDTO.getReceiverId());//
+        UChatter peerChatter = userService.findChatterById(msgDTO.getReceiverId());
 
         Message msg = Message.builder().msgStatus(MsgStatus.SEND)
                                         .senderId(currentUser.getId())
@@ -37,14 +37,16 @@ public class MessageService {
         msgRepository.save(msg);
 
     //-----finds or creates chats and saves massage in current user
-        Chat userChat = Chat.builder().peerId(msgDTO.getReceiverId()).msgList(new ArrayList<>()).userOwner(currentUser).build();
+        Chat userChat = Chat.builder().peerId(msgDTO.getReceiverId())
+                        .senderId(currentUser.getId()).msgList(new ArrayList<>()).userOwner(currentUser).build();
         Optional<Chat> opUserChat = currentUser.getChatList().stream().filter(c->c.getPeerId()==msgDTO.getReceiverId()).findFirst();
         if(opUserChat.isPresent())  userChat = opUserChat.get();
         userChat.addMessage(msg);
         chatRepository.save(userChat);
 
     //-----finds or creates chats and saves massage in peer user
-        Chat peerChat = Chat.builder().peerId(currentUser.getId()).msgList(new ArrayList<>()).userOwner(peerChatter).build();
+        Chat peerChat = Chat.builder().peerId(currentUser.getId())
+                        .senderId(peerChatter.getId()).msgList(new ArrayList<>()).userOwner(peerChatter).build();
         Optional<Chat> opPeerChat = peerChatter.getChatList().stream().filter(c->c.getPeerId()==currentUser.getId()).findFirst();
         if(opPeerChat.isPresent()) peerChat = opPeerChat.get();
         peerChat.addMessage(msg);

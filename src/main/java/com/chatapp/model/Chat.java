@@ -20,6 +20,7 @@ public class Chat {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long peerId;
+    private long senderId;
 //    private ArrayList<Long> msgIdList;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
@@ -29,7 +30,8 @@ public class Chat {
     private List<Message> msgList;
 
 
-    @ManyToOne @JsonIgnore
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "userOwnerId")
     private UChatter userOwner;
 

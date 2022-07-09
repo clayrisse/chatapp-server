@@ -19,6 +19,7 @@ public class MessageController {
     @CrossOrigin()
     @ResponseStatus(HttpStatus.CREATED)
 
+//    public Message sendMessage(@RequestBody MsgDTO msgDTO, @AuthenticationPrincipal UserDetails userDetails) {
     public Message sendMessage(@RequestBody MsgDTO msgDTO, @AuthenticationPrincipal UserDetails userDetails) {
         System.err.println("entreeee-------------------------"+ msgDTO.toString());
         return msgService.sendMessage(msgDTO, userDetails);

@@ -101,10 +101,12 @@ public class UserService {
     }
 
     public String getUsernameById(long id) {
+        System.err.println(findChatterById(id).getUsername());
+
         return findChatterById(id).getUsername();
     }
 
-    public long getIdByUsername( String username) {
+    public long getIdByUsername(String username) {
         return findChatterByUsername(username).getId();
     }
 

@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("username/{id}")
-    @CrossOrigin()  @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin()  @ResponseStatus(HttpStatus.CREATED)
     public String getUsernameById(@PathVariable long id) {
         return userService. getUsernameById(id);
     }
