@@ -27,23 +27,27 @@ public class ContactController {
         return contactService.createContact(contact, userDetails);
     }
 
-//    @GetMapping("/id/{id}")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Contact getContactById(@PathVariable long id, @AuthenticationPrincipal UserDetails userDetails) {
-//        return contactService.getContactById (id, userDetails);
-//    }
-//
-//    @GetMapping("/username/{username}")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Contact getContactByUsername(@PathVariable String username, @AuthenticationPrincipal UserDetails userDetails) {
-//        return contactService.getContactByUsername (username, userDetails);
-//    }
-//
-//    @GetMapping("/name/{customName}")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Contact getContactCustomName(@PathVariable String customName, @AuthenticationPrincipal UserDetails userDetails) {
-//        return contactService.getContactCustomName (customName, userDetails);
-//    }
+    @GetMapping("/id/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Contact getContactById(@PathVariable long id, @AuthenticationPrincipal UserDetails userDetails) {
+        return contactService.getContactById (id, userDetails);
+    }
 
+    @GetMapping("/username/{username}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Contact getContactByUsername(@PathVariable String username, @AuthenticationPrincipal UserDetails userDetails) {
+        return contactService.getContactByUsername (username, userDetails);
+    }
 
+    @GetMapping("/name/{customName}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Contact getContactCustomName(@PathVariable String customName, @AuthenticationPrincipal UserDetails userDetails) {
+        return contactService.getContactCustomName (customName, userDetails);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void deleteContact(@PathVariable long id, @AuthenticationPrincipal UserDetails userDetails) {
+        contactService.deleteContact (id, userDetails);
+    }
 }
