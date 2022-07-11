@@ -101,7 +101,7 @@ public class UserService {
     }
 
     public String getUsernameById(long id) {
-        System.err.println(findChatterById(id).getUsername());
+        System.err.println(findChatterById(id).getUsername() + "hello clau");
 
         return findChatterById(id).getUsername();
     }

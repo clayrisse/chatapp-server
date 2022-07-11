@@ -61,13 +61,13 @@ public class MessageService {
         chatRepository.save(chat);
     }
 
-    public boolean deleteMessage(long msgId, UserDetails userDetails) {
-
+    public boolean deleteMessage(long msgId, long time, UserDetails userDetails) {
         if (msgRepository.findById(msgId).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Message with id '" + msgId + "' not found");
         }
         Message msg = msgRepository.findById(msgId).get();
         UChatter currentUser = userService.findChatterByUsername(userDetails.getUsername());
+    System.err.println(Long.valueOf(msg.getTimestamp()) + "  " + time);
 
         //alguien ha borrado antes
         if (msg.getChatList().size() == 1 && msg.getChatList().get(0).getUserOwner().getId() == currentUser.getId()) {
@@ -79,7 +79,10 @@ public class MessageService {
         //nadie ha borrado es el sender
         if (msg.getChatList().size() == 2 && msg.getChatList().get(0).getUserOwner().getId() == currentUser.getId()) {
             findChatRmvMsgAndSave(msg, 0);
-            if (Integer.parseInt(msg.getTimestamp()) <= 2) { // borra en 2 min si cometiste un error
+            System.err.println("ay papa" + Long.valueOf(msg.getTimestamp())+ time);
+            if (time - Long.valueOf(msg.getTimestamp())  <= 50000) { // borra en 2 min si cometiste un error
+                System.err.println("borro el peer");
+                System.err.println(Long.valueOf(msg.getTimestamp())- time);
                 findChatRmvMsgAndSave(msg, 0);
                 msgRepository.deleteById(msgId);//clean msg from ddbb
             }

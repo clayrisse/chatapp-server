@@ -22,6 +22,8 @@ public class ContactService {
     @Autowired    ContactRepository contactRepository;
 
     public Contact createContact(Contact contact, UserDetails userDetails) {
+
+        System.err.println(contact.getUsername() + " " + contact.getCustomName());
         UChatter currentChatter = userService.findChatterByUsername(userDetails.getUsername());
         Contact newContact  =  Contact.builder().customName(contact.getCustomName())
                                                 .username(contact.getUsername())

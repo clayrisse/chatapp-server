@@ -69,10 +69,10 @@ public class Application implements CommandLineRunner {
 		userService.addChatter(new UChatterDTO("rocio", "qqqqqqq"));
 		userService.addChatter(new UChatterDTO("jaume", "qqqqqqq"));
 		userService.addChatter(new UChatterDTO("jose", "qqqqqqq"));
-		userService.addChatter(new UChatterDTO("martina", "qqqqqqq"));
-		userService.addChatter(new UChatterDTO("miky", "qqqqqqq"));
-		userService.addChatter(new UChatterDTO("adri", "qqqqqqq"));
-		userService.addChatter(new UChatterDTO("ale", "qqqqqqq"));
+//		userService.addChatter(new UChatterDTO("martina", "qqqqqqq"));
+//		userService.addChatter(new UChatterDTO("miky", "qqqqqqq"));
+//		userService.addChatter(new UChatterDTO("adri", "qqqqqqq"));
+//		userService.addChatter(new UChatterDTO("ale", "qqqqqqq"));
 
 
 	}

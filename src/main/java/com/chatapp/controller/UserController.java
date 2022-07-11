@@ -51,6 +51,8 @@ public class UserController {
     @GetMapping("username/{id}")
     @CrossOrigin()  @ResponseStatus(HttpStatus.CREATED)
     public String getUsernameById(@PathVariable long id) {
+
+        System.err.println("entre por aqui a buscar usesrname by id " + id);
         return userService. getUsernameById(id);
     }
 

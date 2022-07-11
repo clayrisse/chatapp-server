@@ -25,10 +25,16 @@ public class MessageController {
         return msgService.sendMessage(msgDTO, userDetails);
     }
 
-    @DeleteMapping("/{msgId}")
+//    @DeleteMapping("/{msgId}")
+//    @CrossOrigin()  @ResponseStatus(HttpStatus.OK)
+//    public boolean deleteMessage(@PathVariable long msgId, @AuthenticationPrincipal UserDetails userDetails) {
+//        return msgService.deleteMessage(msgId, userDetails);
+//    }
+
+    @DeleteMapping("/{msgId}/{time}")
     @CrossOrigin()  @ResponseStatus(HttpStatus.OK)
-    public boolean deleteMessage(@PathVariable long msgId, @AuthenticationPrincipal UserDetails userDetails) {
-        return msgService.deleteMessage(msgId, userDetails);
+    public boolean deleteMessage(@PathVariable long msgId, @PathVariable long time, @AuthenticationPrincipal UserDetails userDetails) {
+        return msgService.deleteMessage(msgId, time, userDetails);
     }
 
     @DeleteMapping("/clear/chat/{chatId}")
